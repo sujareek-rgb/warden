@@ -14,6 +14,7 @@ Claude skills for QA test-case prep, one skill per project.
 | `/tc-ols xxxx format` | Move OLS TCs into the release template |
 | `/tc-ols xxxx run` | Manual execution from the TC sheet |
 | `/focus-target-update [date]` | Daily target result: read the day's Target rows (read-only), collect my Jira and Discord review evidence, judge each target (✅ / ⚠️ / ❌), then after **Approve** post one bullet message in the Discord Target channel |
+| `/taskfolio-log` | Fill this week's Taskfolio timesheet from evidence (Jira changes, Slack, Calendar): one table per day, **Approve** before anything is saved, then each entry is read back and compared before it is saved. Never clicks Submit week |
 
 TC review for OLS, or without PYR rules: Helix `/tc-review`.
 
@@ -75,6 +76,14 @@ Create TCs with the OLS rules (Core / Edge, OLS glossary), `format` (move into t
 - Once per machine: Chrome *View → Developer → Allow JavaScript from Apple Events* must be on (osascript reads Discord through it). The skill temporarily replaces your clipboard and restores it afterwards.
 - Untested by a second person yet: the first teammate to run it should check the posting step on their machine.
 
+### `/taskfolio-log` — fill the Taskfolio week
+- Needs the VPN **off** and the Taskfolio week page open and signed in, in Chrome (*View → Developer → Allow JavaScript from Apple Events* once per machine).
+- Reads the week page (drafts from Jira and Calendar), then collects the day's evidence: your own Jira changes and comments, bugs you opened, Slack you sent, Calendar. Read-only.
+- Shows one table per day (entry, action, subcategory, time, evidence) with a day total and every open question. **Nothing is saved before you confirm.**
+- Each entry is saved one at a time through the dialog; the form is read back and must match the confirmed row (category, subcategory, project, start, end, logged time) or it is cancelled. Every entry gets a Project, meetings too.
+- Working hours, lunch and the Taskfolio URL come from the Tracking sheet `Config` tab (`TASKFOLIO_URL`, `WORK_START`, `WORK_END`, `LUNCH`, `WEEK_HOURS`).
+- Never clicks Submit week: you do that yourself.
+
 ## Layout
 
 ```
@@ -83,6 +92,7 @@ skills/tc-ols/   SKILL.md + references/{ols,execute}.md
 skills/qase-run/ SKILL.md + references/video-evidence.md
 skills/test-task/ SKILL.md + references/video-evidence.md   (video-evidence.md copies must stay identical)
 skills/focus-target-update/ SKILL.md + references/discord-posting.md
+skills/taskfolio-log/ SKILL.md + references/apply.md + scripts/{tf,tf-lib,vpn_check}.sh
 ```
 
 ## Prerequisite: Helix
@@ -166,6 +176,7 @@ Team-private values stay out of this public repo. Add to the `Config` tab (Key, 
 | `TARGET_SHEET`, `TARGET_TAB` | Focus work sheet URL and its daily Target tab (`/focus-target-update`) |
 | `TARGET_DISCORD_CHANNEL`, `REVIEW_DISCORD_CHANNEL` | Discord channel URLs: where results are posted, and where TC review threads live (`/focus-target-update`) |
 | `JIRA_PROJECTS` | Project keys the team tests, comma separated, e.g. `PYR, OLS` (`/focus-target-update` limits its TC Status search to them) |
+| `TASKFOLIO_URL`, `WORK_START`, `WORK_END`, `LUNCH`, `WEEK_HOURS` | Taskfolio week page URL, the working day (e.g. `09:30`, `18:30`), lunch (e.g. `12:00-13:00`) and expected hours per week (e.g. `40`) (`/taskfolio-log`) |
 
 Videos need `ffmpeg` and Playwright installed locally (`brew install ffmpeg`).
 
