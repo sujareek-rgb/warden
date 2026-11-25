@@ -31,11 +31,11 @@ Part of create (SKILL.md step 9), after the Drive sheet and tracking row exist a
 - This is not the "Question comment" and needs no extra question to the user. `/tc-pyr xxx update` adds a link only if its URL is missing on the card.
 
 ## Drive TC sheet format
-Applies to every TC sheet this skill creates or updates (create, `update`, `updateTCSheet`, review fixes). The template (`TC_TEMPLATE`) keeps its colors, borders, header text and the status dropdown; the settings below replace its font, wrapping and column widths. Apply them to the whole used range (header row and every TC row), in one `batchUpdate`, after the rows are written:
+Applies to every TC sheet this skill creates or updates (create, `update`, `updateTCSheet`, review fixes). The template (`TC_TEMPLATE`) keeps its colors, borders, header text, the 15 columns and the dropdowns (Test Case Type, Test Status, PO/BA - TC Review Status); the settings below replace its wrapping and set the widths. Apply them to the whole used range (header row and every TC row), in one `batchUpdate`, after the rows are written:
 
-- **Font:** `Roboto`, size `10` on every cell (header included). Header bold; body not bold.
+- **Font:** `Calibri`, size `10` on every cell (header included), as in the template. Header bold; body not bold.
 - **Text wrapping:** `WRAP` on every cell, header and body. (The template's body rows are `OVERFLOW_CELL`: change them.)
-- **Alignment:** body rows vertical `TOP`; header vertical `MIDDLE`, horizontal `CENTER`. `Test Case ID` and `Test Case Type` horizontal `CENTER`; everything else left.
+- **Alignment:** every row vertical `TOP`; header horizontal `CENTER`. Body horizontal `CENTER` for `Test Case Type`, `QA Owner` and `PO/BA - TC Review Status`; everything else left.
 - **Column widths (px)** = the widths of the template `TC_TEMPLATE` (tab `PRY-xx TC`), set explicitly, no auto-fit (auto-fit makes the long text columns thousands of pixels wide and the short ones too narrow):
 
 | Col | Header | Width |
@@ -50,12 +50,15 @@ Applies to every TC sheet this skill creates or updates (create, `update`, `upda
 | H | Test Step | 302 |
 | I | Expected Result | 302 |
 | J | QA Owner | 158 |
-| K | PO/BA - TC Review Status | 100 |
-| L | PO/BA - Feedback | 100 |
+| K | Test Status | 207 |
+| L | Linked Bug | 146 |
+| M | Remark | 229 |
+| N | PO/BA - TC Review Status | 100 |
+| O | PO/BA - Feedback | 100 |
 
   If the template has more or fewer columns, keep these widths for the columns that match by header and give any other column 150. Never leave a column under 80 or over 320. If the template's widths change, the template wins: read them from its column metadata and update this table.
 - **Row heights:** after the widths are set, `autoResizeDimensions` on the TC rows (ROWS). Read one row with several numbered lines back: if its height is only one line (about 21 px), the resize did not take effect, so set each row's height by hand: lines × 15 + 8 px, where lines = the largest, over the row's cells, of the sum of ROUNDUP(characters in a line / ((column width − 10) / 7)) over its lines. Header row 32 px. Freeze row 1.
-- **Check before reporting:** read the font, wrap and widths back from one header cell, one body row and the column metadata, and say in the report `Roboto 10, wrap, widths set` or what differs. Row heights are estimates when set by hand: say so.
+- **Check before reporting:** read the font, wrap and widths back from one header cell, one body row and the column metadata, and say in the report `Calibri 10, wrap, widths set` or what differs. Row heights are estimates when set by hand: say so.
 
 ## Ticket review (before writing TCs)
 Early PYR tickets have a **prototype** instead of Figma. **The prototype is a rough picture for developers** (how the pages look and flow), not a wording source.
