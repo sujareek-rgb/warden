@@ -160,7 +160,7 @@ Team-private values stay out of this public repo. Add to the `Config` tab (Key, 
 | `MENTION_SAMORN`, `MENTION_NIPIT`, `MENTION_SUJAREE` | Discord username (or `<@id>` mention) of each QA member (`/tc-pyr xxx`); a username is resolved to a real mention at post time |
 | `PO_JIRA_ACCOUNT` | Jira accountId or e-mail of the PO, tagged in the question comment (`/tc-pyr xxx`) |
 | `DISCORD_QUESTION_CHANNEL` | Discord channel for the "มี comment <link>" post (`/tc-pyr xxx`) |
-| `POPYR_MENTIONS` | PO to mention in the review request: Discord usernames, `<@id>` or role mentions, space separated (`/tc-pyr xxx review`) |
+| `PO_MENTIONS` | PO to mention in the review request: Discord usernames, `<@id>` or role mentions, space separated (`/tc-pyr xxx review`) |
 | `QA_REVIEWERS` | E-mails to tag for review, comma separated (`/test-task`) |
 | `PROTOTYPE_URL`, `PROTOTYPE_USER` | Pyrite prototype (see below) |
 | `TARGET_SHEET`, `TARGET_TAB` | Focus work sheet URL and its daily Target tab (`/focus-target-update`) |
