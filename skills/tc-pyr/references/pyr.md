@@ -141,7 +141,7 @@ TC: [Link](<Drive link of the ticket's TC sheet>)
 3. Show the thread name, the chosen reviewer and the exact body in the review gate before posting. Post nothing that was not shown and approved. The reviewer is picked when the gate is built, so the approved text is what gets posted. Never create two threads for one ticket in one run. A webhook cannot see the channel, so a thread created by hand is not known: the user tells you.
 
 ## Question comment
-Runs only from `/tc-pyr xxx` (create), after the Create sign-off, and only if **open questions** for the PO remain. No open questions → skip silently. Uses `DISCORD_QUESTION_CHANNEL`, `POPYR_MENTIONS` (Discord) and `PO_JIRA_ACCOUNT` (Jira accountId or e-mail of the PO; an e-mail is resolved with `lookupJiraAccountId`) from the `Config` tab (missing → ask once, never guess). If the Discord MCP is not connected, post the Jira comment only if the user said yes, then give the Discord message as ready-to-paste text.
+Runs only from `/tc-pyr xxx` (create), after the Create sign-off, and only if **open questions** for the PO remain. No open questions → skip silently. Uses `DISCORD_QUESTION_CHANNEL`, `PO_MENTIONS` (Discord) and `PO_JIRA_ACCOUNT` (Jira accountId or e-mail of the PO; an e-mail is resolved with `lookupJiraAccountId`) from the `Config` tab (missing → ask once, never guess). If the Discord MCP is not connected, post the Jira comment only if the user said yes, then give the Discord message as ready-to-paste text.
 
 1. Show the exact comment text (below) and the Discord message, then ask once, in Thai: `comment ใน Jira ไหม? (ใช่ / ไม่)`. The answer covers both the Jira comment and the Discord post.
 2. **ไม่** → post nothing. The questions stay in chat for the user to forward.
@@ -154,7 +154,7 @@ Runs only from `/tc-pyr xxx` (create), after the Create sign-off, and only if **
      ```
      Bullet rules: one line per question, one short sentence with only the ask (what is unclear, what the PO must decide). No quoted paragraphs, no background, no option lists. Only the PO is mentioned. No other text, no secrets.
    - Build the comment link from the result: `<Jira site>/browse/PYR-xxx?focusedCommentId=<comment id>`. Open check: the link must contain the new comment id.
-   - Post in `DISCORD_QUESTION_CHANNEL`: `<POPYR_MENTIONS> มี comment <comment link>` (PO resolved to a real mention as in "Create sign-off").
+   - Post in `DISCORD_QUESTION_CHANNEL`: `<PO_MENTIONS> มี comment <comment link>` (PO resolved to a real mention as in "Create sign-off").
 4. Post once per run. If the Jira comment fails, do not post to Discord. Stop and say which step failed.
 
 ## Review sign-off
